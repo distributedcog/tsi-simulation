@@ -6,7 +6,7 @@ Two independent benchmarks are included, one per degree:
 
 | File | Benchmark | Complex |
 | --- | --- | --- |
-| `benchmark_sim.py` | Degree-1, `C_m` ring (Section 9.1) | `C_6` and its filled simplex |
+| `benchmark_deg1.py` | Degree-1, `C_m` ring (Section 9.1) | `C_6` and its filled simplex |
 | `benchmark_deg2.py` | Degree-2, exhaustive (Section 9.2) | `dDelta^3`, boundary of the tetrahedron |
 | `fastopt.py` | Vectorized search helpers for the degree-2 case (up to two compressing senders) | — |
 | `fastopt3.py` | Same, extended to three simultaneously compressing senders (`beta` in `{5,6}`) | — |
@@ -19,7 +19,7 @@ Both scripts need only NumPy:
 python3 -m pip install numpy
 ```
 
-## Degree-1 benchmark (`benchmark_sim.py`)
+## Degree-1 benchmark (`benchmark_deg1.py`)
 
 The script exhaustively enumerates the registered instance `m=6`, `B=2`, `beta=5`, covering all `5^6 = 15,625` inputs. It compares:
 
@@ -29,7 +29,7 @@ The script exhaustively enumerates the registered instance `m=6`, `B=2`, `beta=5
 - a trivial-cohomology control task.
 
 ```bash
-python3 benchmark_sim.py
+python3 benchmark_deg1.py
 ```
 
 ### Expected headline result

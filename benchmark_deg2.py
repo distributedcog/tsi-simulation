@@ -1,5 +1,6 @@
 """
-benchmark_deg2.py -- exhaustive degree-2 benchmark for TSI (Section 9.2).
+benchmark_deg2.py -- Topological Sheaves of Irreducibility (TSI) degree-2 benchmark
+(Section 9.2).
 
 Task model  (K_T, F_T) = (dDelta^3, R), boundary of the tetrahedron, constant sheaf.
             H^0 = R, H^1 = 0, H^2 = R;  beta^2(K_T; F_T) = 1 and the critical
@@ -20,9 +21,11 @@ Control     single 2-simplex {0,1,2}, decide c_012 = 0.  H^2 = 0, no class;
 Systems (four agents, agent 0 = coordinator, one synchronous round; every message
 and every primitive output is a simultaneous function of the initial shares, so a
 primitive output cannot be relayed):
-  S_fill  complete pairwise + registered all-agent primitive g_A = ell.
+  S_fill  complete pairwise + four registered 3-agent primitives + registered
+          all-agent primitive g_A = ell.
           induced complex Delta^3, H^2 = 0        ->  class-filling.
-  S_face  complete pairwise + the four registered 3-agent primitives g_sigma = c_sigma.
+  S_face  the same system with the all-agent primitive removed; the four
+          registered 3-agent primitives g_sigma = c_sigma remain.
           induced complex dDelta^3 = K_T           ->  class extends.
   S_pair  complete pairwise only, induced complex skel_1(Delta^3).
 

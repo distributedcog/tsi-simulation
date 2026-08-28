@@ -1,4 +1,6 @@
-"""Exhaustive evaluation of deterministic one-round protocols on the C_m benchmark.
+"""Topological Sheaves of Irreducibility (TSI) degree-1 benchmark.
+
+Exhaustive evaluation of deterministic one-round protocols on C_m.
 
 Registered instance: m=6, B=2 -> h_B=3, q_{m,B}=5, congestion beta=5 with
 q <= beta < (m-1)h_B = 15. All 5^6 = 15,625 instances enumerated (uniform prior).
@@ -138,13 +140,13 @@ for lab1, lab5 in itertools.chain(
     r = evaluate_ring(lab1, lab5)
     ring_best = (max(ring_best[0], r[0]), max(ring_best[1], r[1]))
 n_unreal = int(unreal.sum())
-print(f"filled simplex + joint primitive: T1 correct={n_inst} (1.000000)  "
+print(f"S_fill (atomic g_A): T1 correct={n_inst} (1.000000)  "
       f"T3 exact={n_unreal}/{n_unreal} (1.0000)")
-print(f"same 1-skeleton ablation / complete pairwise only: "
+print(f"S_pair (same 1-skeleton): "
       f"T1 correct={complete_pairwise_best[0]} ({complete_pairwise_best[0]/n_inst:.6f})  "
       f"T3 exact={complete_pairwise_best[1]}/{complete_pairwise_best[2]} "
       f"({complete_pairwise_best[1]/complete_pairwise_best[2]:.4f})")
-print(f"base-ring sanity best: T1 correct={ring_best[0]} ({ring_best[0]/n_inst:.6f})  "
+print(f"S_ring (sanity check): T1 correct={ring_best[0]} ({ring_best[0]/n_inst:.6f})  "
       f"T3 exact={ring_best[1]}/{n_unreal} ({ring_best[1]/n_unreal:.4f})")
 print(f"complete-pairwise T1 gain over majority baseline: "
       f"{complete_pairwise_best[0]-(n_inst-n_real)} instances")

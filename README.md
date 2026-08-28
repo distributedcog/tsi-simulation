@@ -1,12 +1,12 @@
-# TSI Simulation
+# Topological Sheaves of Irreducibility (TSI) Simulations
 
-Reproducible Python simulations for the finite benchmarks in "Topological Signatures of Irreducibility".
+Reproducible Python simulations for the finite benchmarks in "Topological Sheaves of Irreducibility: A Theoretical Framework for Multi-Agent Task Obstructions".
 
 Two independent benchmarks are included, one per degree:
 
 | File | Benchmark | Complex |
 | --- | --- | --- |
-| `benchmark_deg1.py` | Degree-1, `C_m` ring (Section 9.1) | `C_6` and its filled simplex |
+| `benchmark_sim.py` | Degree-1, `C_m` ring (Section 9.1) | `C_6` and its filled simplex |
 | `benchmark_deg2.py` | Degree-2, exhaustive (Section 9.2) | `dDelta^3`, boundary of the tetrahedron |
 | `fastopt.py` | Vectorized search helpers for the degree-2 case (up to two compressing senders) | — |
 | `fastopt3.py` | Same, extended to three simultaneously compressing senders (`beta` in `{5,6}`) | — |
@@ -19,7 +19,7 @@ Both scripts need only NumPy:
 python3 -m pip install numpy
 ```
 
-## Degree-1 benchmark (`benchmark_deg1.py`)
+## Degree-1 benchmark (`benchmark_sim.py`)
 
 The script exhaustively enumerates the registered instance `m=6`, `B=2`, `beta=5`, covering all `5^6 = 15,625` inputs. It compares:
 
@@ -29,15 +29,15 @@ The script exhaustively enumerates the registered instance `m=6`, `B=2`, `beta=5
 - a trivial-cohomology control task.
 
 ```bash
-python3 benchmark_deg1.py
+python3 benchmark_sim.py
 ```
 
 ### Expected headline result
 
 ```text
-filled simplex + joint primitive: T1 correct=15625 (1.000000)  T3 exact=13874/13874 (1.0000)
-same 1-skeleton ablation / complete pairwise only: T1 correct=13875 (0.888000)  T3 exact=3694/13874 (0.2663)
-base-ring sanity best: T1 correct=13874 (0.887936)  T3 exact=2340/13874 (0.1687)
+S_fill (atomic g_A): T1 correct=15625 (1.000000)  T3 exact=13874/13874 (1.0000)
+S_pair (same 1-skeleton): T1 correct=13875 (0.888000)  T3 exact=3694/13874 (0.2663)
+S_ring (sanity check): T1 correct=13874 (0.887936)  T3 exact=2340/13874 (0.1687)
 control task, one full-value message: correct=15625/15625
 ```
 
@@ -51,9 +51,9 @@ task is solvable exactly when `ell(c) = 0`.
 
 Four agents, agent 0 the coordinator, one synchronous round. Three systems are compared:
 
-- `S_fill` — complete pairwise plus the registered all-agent primitive `g_A = ell`; the induced complex is `Delta^3`, so `H^2 = 0` and the class is filled,
-- `S_face` — complete pairwise plus the four registered 3-agent primitives `g_sigma = c_sigma`; the induced complex is `dDelta^3 = K_T`, so the class extends,
-- `S_pair` — complete pairwise only, induced complex `skel_1(Delta^3)`.
+- `S_fill` — complete pairwise, the four registered 3-agent primitives `g_sigma = c_sigma`, and the registered all-agent primitive `g_A = ell`; the induced complex is `Delta^3`, so `H^2 = 0` and the class is filled,
+- `S_face` — the same system with the all-agent primitive removed; the induced complex is `dDelta^3 = K_T`, so the class extends,
+- `S_pair` — pairwise communication only, with induced complex `skel_1(Delta^3)`; this is the base-topology sanity check rather than the primary ablation control.
 
 The search over deterministic one-round protocols is exhaustive, via the sufficient-statistic
 and maximal-partition reductions described in the module docstring.
